@@ -6,7 +6,7 @@ I have been using spring for quite long and I have used it for test exercise as 
  constructing other dependencies. Spring helps to inject all the and construct dependencies.
 - MVC is good pattern for webapps and Spring MVC framework is good.
 - Spring promotes programming by contract/interface which is good.
-- Spring provide lot of libraries/frameworks to do common tasks like transactions, AOP, validation, ORM and cloud etc. As
+- Spring provides lot of libraries/frameworks to do common tasks like transactions, AOP, validation, ORM and cloud etc. As
     lot of people use Spring so chances of having bugs are less.
 - It is open source and Spring community is quite big and very active. So it is easy to find answers to your questions or
     problems.
@@ -20,7 +20,7 @@ I removed it Google App Engine because of some java restrictions.
 
 2. When would you use automatic testing ?
 I would use automatic testing if automatic testing gives me enough confidence to release in production and if it is quicker
- than manual testing.
+ than manual testing. In the coding task I have used both TDD and BDD.
  - I quite like TDD and BDD. TDD is first step toward automatic testing. In my experience it is usually easy to automate testing
  when contract of software is clear. For example in APIs and SOA different components interact based on contract so it is
    good idea to automate testing. So for these cases I will use automatic testing.
@@ -32,27 +32,27 @@ One scenarios where I may not get enough confidence from automatic testing is UI
 3. You just received the root access of your project's freshly installed linux box.
 Describe the main steps you'll take to run the war on it.
 
-- Secure the box e.g. use firewalls, create user/groups for application server
 - Check what java version was used to build war.
-- install an application server which supports required java version e.g Tomcat, Weblogic, Jetty or Jboss etc.. Server might have some other dependecies e.g JDK/JRE.
+- install an application server which supports required java version e.g Tomcat, Weblogic, Jetty or Jboss etc. Application server might have some other dependecies e.g JDK/JRE.
 - copy the war to directory specific to server. For example in Tomcat copy war to the webapps directory.
-- tune heap size, garbage collection and other setting for war. This should be found during load testing.
+- tune heap size, garbage collection and other setting for war. For prod usually it should be found during load testing.
 - Configure port, https etc. in server configuration.
 - there might be some application properties which might be need to be overridden
-- Secure the server e.g. disable directory listing, disable/change default usernames/passwords etc
 - Start server
+- For prod env secure the server e.g. disable directory listing, disable/change default usernames/passwords etc
+- For prod env secure the box e.g. use firewalls and open only what is required to run the application, create user/groups for application server
 
 4. Once deployed, your users start whining about slow pages, timeouts, failed uploads,
 etc. As a developer, how would you handle this ?
 - First step is to find out reason for slowness. So I will measure and monitor every layer. For example if I have
-java application connecting to database. Than measure how long it takes to access application as end user. Than out of that
-find out where it is spending most of the time. Is it network? Is it Java? Is it Database? I should start by looking
+java application connecting to database. Then I will measure how long it takes to access application as end user. Than out of that
+find out where it is spending most of the time. Is it network? Is it application layer code? Is it database layer? I will start by looking
 at the layer where is spends most of the time.In my experience usually it is database layer.
 - Once I know what layer is spending most of the time I will do profiling. For java tools like JvisualVM can be used.
 For databases query profiling can be used. Also there are network latency measuring tools. In my experience the most weird
 problem I have found was a faulty network cable in database cluster which was causing slow queries.
-- if the problem is in database quereis than most of the time it might be missing some index or queries may not be
+- if the problem is in database queries than most of the time it might be missing some index or queries may not be
    using index. Worst case might require some denormalization.
 - if problem is in Java than it might be Garbage collection or some inefficient algoritham or some third party library.
-- I can use tools like ELK, cloud watch or splunk to continously gather statistic about performance. If possible run continous
-    performance testing to make sure code level changes do not slow down application.
+- I can use tools like ELK, cloud watch or splunk to continously gather statistic about performance. To avoid these problems
+If possible run continuous performance testing to make sure code level changes do not slow down application.
